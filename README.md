@@ -181,7 +181,9 @@ terraform apply "tfplan"
 - Use [remote state](https://developer.hashicorp.com/terraform/language/state/remote) (e.g., S3, Azure Blob) for shared environments.  
 - Use [Terraform workspaces](https://developer.hashicorp.com/terraform/language/state/workspaces) to manage multiple environments.  
 - Start small (datacenter + cluster) → incrementally add network, port groups, VMs.  
+- Resources and details in documentation are examples. Please ensure to update accordingly.
 
 ---
 
-## 📜 Author:** Phillip Rubin
+## 📜 Author:
+Phillip Rubin
