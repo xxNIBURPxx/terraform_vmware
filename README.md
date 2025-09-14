@@ -61,8 +61,8 @@ vmware_password = "SuperSecurePassword!"
 **datacenter.tf**
 
 ```hcl
-resource "vsphere_datacenter" "<InsertName>" {
-  name = "<InsertName>"
+resource "vsphere_datacenter" "InsertName" {
+  name = "InsertName"
 }
 ```
 
@@ -73,13 +73,13 @@ resource "vsphere_datacenter" "<InsertName>" {
 **cluster.tf**
 
 ```hcl
-data "vsphere_datacenter" "<InsertName>" {
-  name = "<InsertName>"
+data "vsphere_datacenter" "InsertName" {
+  name = "InsertName"
 }
 
-resource "vsphere_compute_cluster" "<InsertName>" {
-  name          = "<InsertName>"
-  datacenter_id = data.vsphere_datacenter.<InsertName>.id
+resource "vsphere_compute_cluster" "InsertName" {
+  name          = "InsertName"
+  datacenter_id = data.vsphere_datacenter.InsertName.id
 }
 ```
 
@@ -90,13 +90,13 @@ resource "vsphere_compute_cluster" "<InsertName>" {
 **network.tf**
 
 ```hcl
-data "vsphere_datacenter" "<InsertName>" {
-  name = "<InsertName>"
+data "vsphere_datacenter" "InsertName" {
+  name = "InsertName"
 }
 
-resource "vsphere_distributed_virtual_switch" "dvSwitch-<InsertName>" {
-  name          = "dvSwitch-<InsertName>"
-  datacenter_id = data.vsphere_datacenter.<InsertName>.id
+resource "vsphere_distributed_virtual_switch" "dvSwitch-InsertName" {
+  name          = "dvSwitch-InsertName"
+  datacenter_id = data.vsphere_datacenter.InsertName.id
 }
 ```
 
@@ -107,14 +107,14 @@ resource "vsphere_distributed_virtual_switch" "dvSwitch-<InsertName>" {
 **port-groups.tf**
 
 ```hcl
-data "vsphere_distributed_virtual_switch" "dvSwitch-<InsertName>" {
-  name          = "dvSwitch-<InsertName>"
-  datacenter_id = data.vsphere_datacenter.<InsertName>.id
+data "vsphere_distributed_virtual_switch" "dvSwitch-InsertName" {
+  name          = "dvSwitch-InsertName"
+  datacenter_id = data.vsphere_datacenter.InsertName.id
 }
 
 resource "vsphere_distributed_port_group" "v22-Servers" {
   name                            = "v22-Servers"
-  distributed_virtual_switch_uuid = data.vsphere_distributed_virtual_switch.dvSwitch-<InsertName>.id
+  distributed_virtual_switch_uuid = data.vsphere_distributed_virtual_switch.dvSwitch-InsertName.id
   vlan_id                         = 22
 }
 ```
@@ -126,18 +126,18 @@ resource "vsphere_distributed_port_group" "v22-Servers" {
 **main.tf**
 
 ```hcl
-data "vsphere_datacenter" "<InsertName>" {
-  name = "<InsertName>"
+data "vsphere_datacenter" "InsertName" {
+  name = "InsertName"
 }
 
-data "vsphere_compute_cluster" "<InsertName>" {
-  name          = "<InsertName>"
-  datacenter_id = data.vsphere_datacenter.<InsertName>.id
+data "vsphere_compute_cluster" "InsertName" {
+  name          = "InsertName"
+  datacenter_id = data.vsphere_datacenter.InsertName.id
 }
 
 resource "vsphere_virtual_machine" "test" {
   name             = "test"
-  resource_pool_id = data.vsphere_compute_cluster.<InsertName>.resource_pool_id
+  resource_pool_id = data.vsphere_compute_cluster.InsertName.resource_pool_id
   datastore_id     = data.vsphere_datastore.SYNOLOGY.id
   num_cpus         = 4
   memory           = 8192
@@ -184,6 +184,4 @@ terraform apply "tfplan"
 
 ---
 
-## 📜 License
-
-This project is provided as-is under the MIT License. Feel free to fork and adapt to your own VMware environment.
+## 📜 Author:** Phillip Rubin
